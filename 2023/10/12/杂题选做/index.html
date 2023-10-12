@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+  <title>zesqwq&#39;s Nest</title>
+  <link rel="icon" href="/img/pig.ico">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/prism.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.3/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+  <script src="/js/main.js"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body style="height: max-content;" class="ui-col">
+  <div id="dark-mode" onclick="dark_mode()">
+    🌓
+  </div>
+  <div class="ui-header ui-shadow" style="transition: all 0.3s ease; padding: 20px; background: var(--header-bgcol); z-index: 10; height: 60px; width: 100%;">
+    <div class="ui-row ui-space-between">
+  <div>
+    <a href="/" style="color: var(--header-col);">zesqwq&#39;s Nest</a>
+  </div>
+  <div class="ui-row">
+    
+    <div class="ui-row-space"></div>
+    <a href="/archives/" style="color: var(--header-col); margin: 2px;">
+      Archives
+    </a>
+    
+    <div class="ui-row-space"></div>
+    <a href="/categories/" style="color: var(--header-col); margin: 2px;">
+      Categories
+    </a>
+    
+    <div class="ui-row-space"></div>
+    <a href="/tags/" style="color: var(--header-col); margin: 2px;">
+      Tags
+    </a>
+    
+  </div>
+</div>
+  </div>
+  <div class="ui-col-space-big"></div>
+  <div class="ui-col" style="height: max-content;">
+    <div class="ui-content">
+      <div class="ui-max-width ui-card ui-shadow">
+  <div>
+    <div class="ui-padding ui-col">
+<h1>杂题选做</h1>
+<p>创建于 2023-10-12</p>
+
+
+</div>
+  </div>
+  <div class="ui-padding">
+    <ul>
+<li><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1019/C">CF1019C Sergey's problem</a></li>
+</ul>
+<h2>CF1019C Sergey's problem</h2>
+<p>关键思路：逐个满足条件。</p>
+<p>先满足第二个条件，将编号从小到大贪心，可以做到距离不超过 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> 啥的。</p>
+<p>再满足第一个条件，选择相邻点则删去。</p>
+<p>
+    <div class="ui accordion">
+      <div class=" title">
+        <i class="dropdown icon"></i>
+        code
+      </div>
+      <div class=" content">
+        <p><p><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1e6</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> vec<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> ans<span class="token punctuation">;</span>
+<span class="token keyword">bool</span> vis1<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">,</span> vis2<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> n<span class="token punctuation">,</span> m<span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">read</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> u<span class="token punctuation">,</span> v<span class="token punctuation">,</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token function">read</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">,</span> vec<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>vis1<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> vis1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> vis2<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">:</span> vec<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> vis1<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> n<span class="token punctuation">;</span> i<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>vis2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">:</span> vec<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> vis2<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>ans<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">:</span> ans<span class="token punctuation">)</span> <span class="token function">write</span><span class="token punctuation">(</span>v<span class="token punctuation">,</span> <span class="token char">' '</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+</p>
+      </div>
+    </div>
+  </p>
+
+    <div id="comment" style="margin: auto;"></div>
+
+
+
+
+
+
+  </div>
+</div>
+    </div>
+    <div class="ui-col-space-mid"></div>
+    <div>
+      <div class="ui-col">
+  <p style="color: var(--footer-col); padding: 20px 30px;">
+    Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a>,
+    theme by <a target="_blank" rel="noopener" href="https://github.com/ftt2333/hexo-theme-facter">Facter</a>
+  </p>
+</div>
+    </div>
+    <div class="ui-col-space-mid"></div>
+  </div>
+</body>
+
+</html>
